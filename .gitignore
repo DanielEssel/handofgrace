@@ -1,0 +1,15 @@
+node_modules
+.next
+out
+.env
+.env.local
+.DS_Store
+*.log
+.vercel
+next-env.d.ts
+
+# Firebase
+.firebase/
+firebase-debug.log
+*serviceAccount*.json
+serviceAccountKey.json

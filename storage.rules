@@ -1,0 +1,12 @@
+rules_version = '2';
+
+// Uploads are written by the server (Admin SDK) and served via long-lived
+// signed URLs stored on each application document. Both of those bypass these
+// rules, so direct client access is fully closed.
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
