@@ -17,8 +17,12 @@ import { SITE, APPLICATION_FEE } from "@/data/site";
 import { formatCedis } from "@/lib/utils";
 
 const contactItems = [
-  { icon: MapPin, label: "Visit Us", value: SITE.location },
-  { icon: PhoneCall, label: "Call Us", value: SITE.phone, href: `tel:${SITE.phoneRaw}` },
+  {
+    icon: MapPin,
+    label: "Visit Us",
+    value: SITE.locations.map((location) => location.address).join(", "),
+  },
+  { icon: PhoneCall, label: "Call Us", value: SITE.phones[0].display, href: `tel:${SITE.phones[0].raw}` },
   { icon: Mail, label: "Email Us", value: SITE.email, href: `mailto:${SITE.email}` },
   { icon: Clock3, label: "Office Hours", value: SITE.hours },
 ];
@@ -112,7 +116,7 @@ export function RegistrationHub() {
                     <MessageCircle /> Chat on WhatsApp
                   </Button>
                 </a>
-                <a href={`tel:${SITE.phoneRaw}`}>
+                <a href={`tel:${SITE.phones[0].raw}`}>
                   <Button variant="outline-light" size="lg" className="w-full">
                     <PhoneCall /> Call Admissions
                   </Button>

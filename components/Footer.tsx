@@ -76,7 +76,7 @@ export function Footer() {
                 <MapPin className="mt-0.5 size-4 shrink-0 text-gold-300" />
 
                 <span className="flex flex-col gap-1">
-                  {SITE.location.map((location) => (
+                  {SITE.locations.map((location) => (
                     <span key={location.address}>
                       {location.address}
                     </span>

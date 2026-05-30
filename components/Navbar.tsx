@@ -77,7 +77,7 @@ export function Navbar() {
           </ul>
 
           <div className="hidden items-center gap-2 lg:flex">
-            <a href={`tel:${SITE.phoneRaw}`} aria-label="Call us">
+            <a href={`tel:${SITE.phones[0].raw}`} aria-label="Call us">
               <Button variant="ghost" size="sm">
                 <Phone />
                 Call
@@ -148,10 +148,10 @@ export function Navbar() {
                       <ArrowRight />
                     </Button>
                   </Link>
-                  <a href={`tel:${SITE.phoneRaw}`} className="w-full">
+                  <a href={`tel:${SITE.phones[0].raw}`} className="w-full">
                     <Button variant="outline" size="lg" className="w-full">
                       <Phone />
-                      Call {SITE.phone}
+                      Call {SITE.phones[0].display}
                     </Button>
                   </a>
                   <AccountMenu compact />

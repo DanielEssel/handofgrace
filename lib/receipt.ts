@@ -56,8 +56,8 @@ export function buildReceipt(data: ReceiptData): jsPDF {
   doc.setFont("helvetica", "normal");
   doc.setFontSize(10);
   doc.setTextColor("#C9D2E0");
-  doc.text(SITE.location, margin, 68);
-  doc.text(`${SITE.phone}  ·  ${SITE.email}`, margin, 84);
+  doc.text(SITE.locations.map((location) => location.address).join(", "), margin, 68);
+  doc.text(`${SITE.phones[0].display}  ·  ${SITE.email}`, margin, 84);
 
   // Title chip on the right
   doc.setTextColor(GOLD);
