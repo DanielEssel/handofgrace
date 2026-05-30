@@ -5,11 +5,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, ArrowRight, Phone } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { AccountMenu } from "@/components/auth/AccountMenu";
 import { cn } from "@/lib/utils";
 import { NAV_LINKS, REGISTER_ANCHOR, SITE } from "@/data/site";
+import { Logo } from "./Logo";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -45,12 +45,15 @@ export function Navbar() {
         <nav
           className={cn(
             "mt-3 flex items-center justify-between rounded-2xl px-4 py-2.5 transition-all duration-300 sm:px-5",
-            scrolled
-              ? "glass border border-navy/10 shadow-soft"
-              : "border border-transparent",
+            "glass border border-navy/10",
+            scrolled ? "shadow-soft" : "shadow-sm",
           )}
         >
-          <Link href="/" aria-label="Hand of Grace — home" className="rounded-xl">
+          <Link
+            href="/"
+            className="flex items-center gap-2.5"
+            aria-label="Hand of Grace Home"
+          >
             <Logo />
           </Link>
 

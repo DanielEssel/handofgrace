@@ -42,11 +42,7 @@ export const PROGRAM_CATEGORIES: ProgramCategory[] = [
         icon: Globe,
         blurb: "Build modern responsive sites with no-code builders.",
       },
-      {
-        name: "Architectural Drawing",
-        icon: Building2,
-        blurb: "Technical drafting and CAD foundations for design.",
-      },
+    
     ],
   },
   {
@@ -80,12 +76,7 @@ export const PROGRAM_CATEGORIES: ProgramCategory[] = [
         icon: Radio,
         blurb: "Sound engineering & live broadcast for services.",
       },
-      {
-        name: "Graphics & Presentation",
-        icon: Presentation,
-        blurb: "Lyric slides, visuals & seamless live presentation.",
-      },
-      {
+            {
         name: "Social Media / Digital Communications",
         icon: Mic2,
         blurb: "Grow & manage a ministry's digital presence.",
