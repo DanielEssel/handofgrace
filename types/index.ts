@@ -84,6 +84,7 @@ export interface EducationBackground {
   institution: string;
   fromYear: string;
   toYear: string;
+  attendedDetails?: string;
   
 }
 
