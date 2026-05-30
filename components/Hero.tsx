@@ -63,8 +63,8 @@ export function Hero() {
               className="mt-6 text-balance text-5xl font-bold leading-[0.95] tracking-tight md:text-7xl"
             >
               Future-Ready{" "}
-              <span className="text-gold-sheen">ICT Education</span> in
-              Awutu&nbsp;Bawjiase
+              <span className="text-gold-sheen">ICT Education</span> for the
+              Next&nbsp;Generation
             </motion.h1>
 
             <motion.p
@@ -102,10 +102,7 @@ export function Hero() {
             </motion.div>
 
             {/* Pills */}
-            <motion.ul
-              variants={item}
-              className="mt-10 flex flex-wrap gap-2.5"
-            >
+            <motion.ul variants={item} className="mt-10 flex flex-wrap gap-2.5">
               {heroPills.map(({ icon: Icon, label }) => (
                 <li
                   key={label}
