@@ -204,14 +204,14 @@ function ApplicationCard({ app }: { app: ApplicationRecord }) {
       </div>
 
       <div className="mt-4 flex flex-wrap gap-2">
-        {app.selectedCourses.map((id) => (
+        {app.selectedCourse && (
           <span
-            key={id}
+            key={app.selectedCourse}
             className="rounded-full bg-navy/5 px-3 py-1 text-xs font-medium text-navy/70"
           >
-            {COURSE_LABELS[id] ?? id}
+            {COURSE_LABELS[app.selectedCourse] ?? app.selectedCourse}
           </span>
-        ))}
+        )}
       </div>
 
       <dl className="mt-5 grid grid-cols-2 gap-4 border-t border-navy/10 pt-4 text-sm sm:grid-cols-4">

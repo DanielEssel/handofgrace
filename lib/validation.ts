@@ -43,7 +43,7 @@ export const educationSchema = z
   });
 
 export const coursesSchema = z.object({
-  selectedCourses: z
+  selectedCourse: z
     .array(z.string())
     .min(1, "Select at least one course to enroll in"),
 });

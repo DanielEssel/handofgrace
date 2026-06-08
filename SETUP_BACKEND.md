@@ -108,7 +108,7 @@ Applications are stored in the `applications` collection:
 | `reference` | Paystack reference (unique) |
 | `paymentVerified`, `amountPesewas`, `currency` | From server verification |
 | `email` (lowercased) | Used by Auth rules + dashboard lookup |
-| `selectedCourses`, `certificateType`, `schedule`, `duration` | Summary fields |
+| `selectedCourse`, `certificateType`, `schedule`, `duration` | Summary fields |
 | `uploads[]` | `{ field, name, type, url, path }` signed-URL refs |
 | `details` | Full original form payload |
 | `createdAt` | Server timestamp |

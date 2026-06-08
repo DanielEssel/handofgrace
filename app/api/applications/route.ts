@@ -140,7 +140,7 @@ export async function POST(req: Request) {
     lastName: data.lastName,
     email: data.email.toLowerCase(),
     mobile: data.mobile,
-    selectedCourses: data.selectedCourses,
+    selectedCourse: data.selectedCourse,
     certificateType: data.certificateType,
     schedule: data.schedule,
     duration: data.duration,

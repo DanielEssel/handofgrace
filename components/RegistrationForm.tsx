@@ -2,14 +2,18 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { useForm, type SubmitHandler, type UseFormSetValue } from "react-hook-form";
+import {
+  useForm,
+  type SubmitHandler,
+  type UseFormSetValue,
+} from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowLeft,
   ArrowRight,
   Check,
-  User, 
+  User,
   Mail,
   Phone,
   MapPin,
@@ -30,9 +34,7 @@ import { Button } from "@/components/ui/button";
 import {
   Field,
   SelectField,
-  TextArea,
   RadioCard,
-  CheckCard,
   ConsentCheckbox,
   ErrorText,
   FileField,
@@ -49,7 +51,12 @@ import { fileToUpload, submitApplication } from "@/lib/firebase/applications";
 import { downloadReceipt } from "@/lib/receipt";
 import type { CourseCategory, RegistrationFormValues } from "@/types";
 
-const CATEGORIES: CourseCategory[] = ["software", "hardware", "church-media"];
+const CATEGORIES: CourseCategory[] = [
+  "hardware-networking",
+  "website-development",
+  "church-media",
+  "ms-office",
+];
 
 export function RegistrationForm() {
   const { user } = useAuth();
@@ -72,11 +79,11 @@ export function RegistrationForm() {
   } = useForm<RegistrationFormValues>({
     resolver: zodResolver(registrationSchema),
     mode: "onTouched",
+    // 2. defaultValues — selectedCourse is now a string, not an array
     defaultValues: {
-      selectedCourses: [],
+      selectedCourse: "", // was: selectedCourse: []
       gender: undefined,
       level: undefined,
-      
       certificateType: undefined,
       schedule: undefined,
       duration: undefined,
@@ -103,21 +110,12 @@ export function RegistrationForm() {
 
   const currentStep = FORM_STEPS[step];
   const isLast = step === FORM_STEPS.length - 1;
-  const progress = ((step + 1) / FORM_STEPS.length) * 100;
 
   const goNext = async () => {
     const valid = await trigger(currentStep.fields);
     if (valid) setStep((s) => Math.min(s + 1, FORM_STEPS.length - 1));
   };
   const goBack = () => setStep((s) => Math.max(s - 1, 0));
-
-  const toggleCourse = (id: string) => {
-    const current = values.selectedCourses ?? [];
-    const next = current.includes(id)
-      ? current.filter((c) => c !== id)
-      : [...current, id];
-    setValue("selectedCourses", next, { shouldValidate: true });
-  };
 
   const onSubmit: SubmitHandler<RegistrationFormValues> = async (data) => {
     if (!paid || !reference) return; // hard guard — never submit before payment
@@ -126,7 +124,8 @@ export function RegistrationForm() {
     try {
       const uploads = [];
       if (photo) uploads.push(await fileToUpload("photo", photo));
-      if (documentFile) uploads.push(await fileToUpload("document", documentFile));
+      if (documentFile)
+        uploads.push(await fileToUpload("document", documentFile));
 
       await submitApplication({
         application: data,
@@ -244,14 +243,52 @@ export function RegistrationForm() {
             {/* ----------------------------- STEP 1 ---------------------------- */}
             {currentStep.id === "personal" && (
               <div className="grid gap-4 sm:grid-cols-2">
-                <Field label="First Name" icon={User} {...register("firstName")} error={errors.firstName?.message} />
-                <Field label="Last Name" icon={User} {...register("lastName")} error={errors.lastName?.message} />
-                <Field label="Email Address" icon={Mail} type="email" {...register("email")} error={errors.email?.message} />
-                <Field label="Mobile Number" icon={Phone} inputMode="tel" {...register("mobile")} error={errors.mobile?.message} />
-                <Field label="Town" icon={MapPin} {...register("town")} error={errors.town?.message} />
-                <Field label="Date of Birth" icon={Calendar} type="date" {...register("dateOfBirth")} error={errors.dateOfBirth?.message} />
+                <Field
+                  label="First Name"
+                  icon={User}
+                  {...register("firstName")}
+                  error={errors.firstName?.message}
+                />
+                <Field
+                  label="Last Name"
+                  icon={User}
+                  {...register("lastName")}
+                  error={errors.lastName?.message}
+                />
+                <Field
+                  label="Email Address"
+                  icon={Mail}
+                  type="email"
+                  {...register("email")}
+                  error={errors.email?.message}
+                />
+                <Field
+                  label="Mobile Number"
+                  icon={Phone}
+                  inputMode="tel"
+                  {...register("mobile")}
+                  error={errors.mobile?.message}
+                />
+                <Field
+                  label="Town"
+                  icon={MapPin}
+                  {...register("town")}
+                  error={errors.town?.message}
+                />
+                <Field
+                  label="Date of Birth"
+                  icon={Calendar}
+                  type="date"
+                  {...register("dateOfBirth")}
+                  error={errors.dateOfBirth?.message}
+                />
                 <div className="sm:col-span-2">
-                  <Field label="Residential Address" icon={MapPin} {...register("address")} error={errors.address?.message} />
+                  <Field
+                    label="Residential Address"
+                    icon={MapPin}
+                    {...register("address")}
+                    error={errors.address?.message}
+                  />
                 </div>
                 <SelectField
                   label="Gender"
@@ -264,10 +301,14 @@ export function RegistrationForm() {
                     { value: "other", label: "Other" },
                   ]}
                 />
-                <Field label="Languages Spoken" icon={Languages} {...register("languages")} error={errors.languages?.message} />
+                <Field
+                  label="Languages Spoken"
+                  icon={Languages}
+                  {...register("languages")}
+                  error={errors.languages?.message}
+                />
               </div>
             )}
-
             {/* ----------------------------- STEP 2 ---------------------------- */}
             {currentStep.id === "education" && (
               <div className="grid gap-4 sm:grid-cols-2">
@@ -283,12 +324,28 @@ export function RegistrationForm() {
                     { value: "tertiary", label: "Tertiary" },
                   ]}
                 />
-                <Field label="Institution Name" icon={School} {...register("institution")} error={errors.institution?.message} />
-                <Field label="From (Year)" inputMode="numeric" maxLength={4} {...register("fromYear")} error={errors.fromYear?.message} />
-                <Field label="To (Year)" inputMode="numeric" maxLength={4} {...register("toYear")} error={errors.toYear?.message} />
+                <Field
+                  label="Institution Name"
+                  icon={School}
+                  {...register("institution")}
+                  error={errors.institution?.message}
+                />
+                <Field
+                  label="From (Year)"
+                  inputMode="numeric"
+                  maxLength={4}
+                  {...register("fromYear")}
+                  error={errors.fromYear?.message}
+                />
+                <Field
+                  label="To (Year)"
+                  inputMode="numeric"
+                  maxLength={4}
+                  {...register("toYear")}
+                  error={errors.toYear?.message}
+                />
               </div>
             )}
-
             {/* ----------------------------- STEP 3 ---------------------------- */}
             {currentStep.id === "courses" && (
               <div className="space-y-6">
@@ -300,21 +357,23 @@ export function RegistrationForm() {
                     </p>
                     <div className="grid gap-3 sm:grid-cols-2">
                       {coursesByCategory(cat).map((course) => (
-                        <CheckCard
+                        <RadioCard
                           key={course.id}
                           label={course.label}
-                          description={course.description}
-                          checked={(values.selectedCourses ?? []).includes(course.id)}
-                          onToggle={() => toggleCourse(course.id)}
+                          checked={values.selectedCourse === course.id} // string compare
+                          onSelect={() =>
+                            setValue("selectedCourse", course.id, {
+                              shouldValidate: true,
+                            })
+                          }
                         />
                       ))}
                     </div>
                   </div>
                 ))}
-                <ErrorText message={errors.selectedCourses?.message as string} />
+                <ErrorText message={errors.selectedCourse?.message as string} />
               </div>
             )}
-
             {/* ----------------------------- STEP 4 ---------------------------- */}
             {currentStep.id === "preferences" && (
               <div className="space-y-6">
@@ -354,12 +413,22 @@ export function RegistrationForm() {
                 />
               </div>
             )}
-
             {/* ----------------------------- STEP 5 ---------------------------- */}
             {currentStep.id === "guarantor" && (
               <div className="grid gap-4">
-                <Field label="Guarantor Name" icon={User} {...register("guarantorName")} error={errors.guarantorName?.message} />
-                <Field label="Guarantor Contact" icon={Phone} inputMode="tel" {...register("guarantorContact")} error={errors.guarantorContact?.message} />
+                <Field
+                  label="Guarantor Name"
+                  icon={User}
+                  {...register("guarantorName")}
+                  error={errors.guarantorName?.message}
+                />
+                <Field
+                  label="Guarantor Contact"
+                  icon={Phone}
+                  inputMode="tel"
+                  {...register("guarantorContact")}
+                  error={errors.guarantorContact?.message}
+                />
                 <ConsentCheckbox
                   checked={!!values.guarantorAgreement}
                   onToggle={() =>
@@ -374,14 +443,15 @@ export function RegistrationForm() {
                 </ConsentCheckbox>
               </div>
             )}
-
             {/* ----------------------------- STEP 6 ---------------------------- */}
             {currentStep.id === "declaration" && (
               <div className="space-y-4">
                 <ConsentCheckbox
                   checked={!!values.acceptTerms}
                   onToggle={() =>
-                    setValue("acceptTerms", !values.acceptTerms, { shouldValidate: true })
+                    setValue("acceptTerms", !values.acceptTerms, {
+                      shouldValidate: true,
+                    })
                   }
                   error={errors.acceptTerms?.message as string}
                 >
@@ -390,7 +460,9 @@ export function RegistrationForm() {
                 <ConsentCheckbox
                   checked={!!values.acceptFees}
                   onToggle={() =>
-                    setValue("acceptFees", !values.acceptFees, { shouldValidate: true })
+                    setValue("acceptFees", !values.acceptFees, {
+                      shouldValidate: true,
+                    })
                   }
                   error={errors.acceptFees?.message as string}
                 >
@@ -492,7 +564,9 @@ export function RegistrationForm() {
               variant="primary"
               size="md"
               disabled={!isComplete || !paid || submitting}
-              className={isComplete && paid && !submitting ? "shimmer-overlay" : ""}
+              className={
+                isComplete && paid && !submitting ? "shimmer-overlay" : ""
+              }
             >
               {submitting ? (
                 <>
@@ -556,11 +630,9 @@ function PreferenceGroup({
             label={o.label}
             checked={value === o.value}
             onSelect={() =>
-              setValue(
-                field,
-                o.value as RegistrationFormValues[typeof field],
-                { shouldValidate: true },
-              )
+              setValue(field, o.value as RegistrationFormValues[typeof field], {
+                shouldValidate: true,
+              })
             }
           />
         ))}

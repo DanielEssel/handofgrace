@@ -97,7 +97,7 @@ export async function fetchApplicationsByEmail(
       lastName: data.lastName ?? "",
       email: data.email ?? "",
       mobile: data.mobile ?? "",
-      selectedCourses: data.selectedCourses ?? [],
+      selectedCourse: data.selectedCourse ?? [],
       certificateType: data.certificateType ?? "",
       schedule: data.schedule ?? "",
       duration: data.duration ?? "",
