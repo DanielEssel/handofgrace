@@ -1,117 +1,104 @@
 import {
-  Code2,
-  MonitorSmartphone,
-  PenTool,
-  Cpu,
   Network,
   HardDrive,
-  Radio,
-  Mic2,
-  Camera,
-  Presentation,
-  Building2,
   Globe,
+  Radio,
+  Presentation,
 } from "lucide-react";
 import type { Course, CourseCategory, ProgramCategory } from "@/types";
 
 export const PROGRAM_CATEGORIES: ProgramCategory[] = [
   {
-    id: "software",
-    title: "Software",
-    tagline: "Master the tools that power the modern digital workplace.",
-    icon: Code2,
-    accent: "from-gold/20 to-gold/5",
+    id: "hardware-networking",
+    title: "Hardware and Networking",
+    tagline: "Understand computer hardware, networks and connectivity.",
+    icon: HardDrive,
+    accent: "from-blue-500/20 to-blue-500/5",
     courses: [
       {
-        name: "Intro to IT",
-        icon: MonitorSmartphone,
-        blurb: "Computer fundamentals, productivity & digital literacy.",
+        name: "Hardware and Networking",
+        icon: Network,
+        blurb: "Understand computer hardware, networks and connectivity.",
       },
-      {
-        name: "MS Office Suite",
-        icon: Presentation,
-        blurb: "Word, Excel, PowerPoint & professional document skills.",
-      },
-      {
-        name: "Graphic Design",
-        icon: PenTool,
-        blurb: "Branding, layouts & visual storytelling for print & web.",
-      },
-      {
-        name: "Website Development (Non-Coding)",
-        icon: Globe,
-        blurb: "Build modern responsive sites with no-code builders.",
-      },
-    
     ],
   },
   {
-    id: "hardware",
-    title: "Hardware",
-    tagline: "Repair, build and connect the machines behind the screen.",
-    icon: Cpu,
-    accent: "from-navy-400/20 to-navy-400/5",
+    id: "website-development",
+    title: "Website Development",
+    tagline: "Build professional, responsive and dynamic websites.",
+    icon: Globe,
+    accent: "from-green-500/20 to-green-500/5",
     courses: [
       {
-        name: "System Engineering (CompTIA A+)",
-        icon: HardDrive,
-        blurb: "Assemble, diagnose & maintain computer systems.",
-      },
-      {
-        name: "Networking (N+)",
-        icon: Network,
-        blurb: "Design, configure & secure modern networks.",
+        name: "Website Development",
+        icon: Globe,
+        blurb: "Build professional, responsive and dynamic websites.",
       },
     ],
   },
   {
     id: "church-media",
     title: "Church Media",
-    tagline: "Production skills for worship, broadcast & digital ministry.",
+    tagline: "Learn media production, live streaming and digital content creation for ministry.",
     icon: Radio,
-    accent: "from-gold/20 to-navy-400/5",
+    accent: "from-orange-500/20 to-orange-500/5",
     courses: [
       {
-        name: "Live Audio & Streaming",
+        name: "Church Media",
         icon: Radio,
-        blurb: "Sound engineering & live broadcast for services.",
+        blurb: "Media production, live streaming and digital content creation for ministry.",
       },
-            {
-        name: "Social Media / Digital Communications",
-        icon: Mic2,
-        blurb: "Grow & manage a ministry's digital presence.",
-      },
+    ],
+  },
+  {
+    id: "ms-office",
+    title: "Microsoft Office Suite",
+    tagline: "Master Word, Excel, PowerPoint, Outlook and other productivity tools.",
+    icon: Presentation,
+    accent: "from-purple-500/20 to-purple-500/5",
+    courses: [
       {
-        name: "Content Creation",
-        icon: Camera,
-        blurb: "Photography, video & storytelling for impact.",
+        name: "Microsoft Office Suite",
+        icon: Presentation,
+        blurb: "Master Word, Excel, PowerPoint, Outlook and other productivity tools.",
       },
     ],
   },
 ];
 
-/** Flat, selectable course list used by the registration form. */
+/** Flat, selectable course list — applicant selects ONE course only. */
 export const COURSES: Course[] = [
-  // Software
-  { id: "intro-it", label: "Intro to IT", description: "Software", category: "software" },
-  { id: "ms-office", label: "MS Office Suite", description: "Software", category: "software" },
-  { id: "graphic-design", label: "Graphic Design", description: "Software", category: "software" },
-  { id: "web-dev", label: "Website Development", description: "Software", category: "software" },
-  { id: "arch-drawing", label: "Architectural Drawing", description: "Software", category: "software" },
-  // Hardware
-  { id: "system-eng", label: "System Engineering", description: "Hardware", category: "hardware" },
-  { id: "networking", label: "Networking", description: "Hardware", category: "hardware" },
-  // Church Media
-  { id: "live-audio", label: "Live Audio & Streaming", description: "Church Media", category: "church-media" },
-  { id: "graphics-presentation", label: "Graphics & Presentation", description: "Church Media", category: "church-media" },
-  { id: "social-media", label: "Social Media / Digital Communications", description: "Church Media", category: "church-media" },
-  { id: "content-creation", label: "Content Creation", description: "Church Media", category: "church-media" },
+  {
+    id: "hardware-networking",
+    label: "Hardware and Networking",
+    description: "Understand computer hardware, networks and connectivity.",
+    category: "hardware-networking",
+  },
+  {
+    id: "website-development",
+    label: "Website Development",
+    description: "Build professional, responsive and dynamic websites.",
+    category: "website-development",
+  },
+  {
+    id: "church-media",
+    label: "Church Media",
+    description: "Media production, live streaming and digital content creation for ministry.",
+    category: "church-media",
+  },
+  {
+    id: "ms-office",
+    label: "Microsoft Office Suite",
+    description: "Master Word, Excel, PowerPoint, Outlook and other productivity tools.",
+    category: "ms-office",
+  },
 ];
 
 export const COURSE_GROUP_LABELS: Record<CourseCategory, string> = {
-  software: "Software",
-  hardware: "Hardware",
+  "hardware-networking": "Hardware and Networking",
+  "website-development": "Website Development",
   "church-media": "Church Media",
+  "ms-office": "Microsoft Office Suite",
 };
 
 export function coursesByCategory(category: CourseCategory): Course[] {

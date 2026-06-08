@@ -333,15 +333,16 @@ function AdminRow({
                 Courses
               </p>
               <div className="flex flex-wrap gap-1.5">
-                {app.selectedCourses.map((id) => (
+                {app.selectedCourse && (
                   <span
-                    key={id}
+                    key={app.selectedCourse}
                     className="rounded-full bg-navy/5 px-2.5 py-1 text-xs font-medium text-navy/70"
                   >
-                    {COURSE_LABELS[id] ?? id}
+                    {COURSE_LABELS[app.selectedCourse] ?? app.selectedCourse}
                   </span>
-                ))}
+                )}
               </div>
+          
               {app.uploads?.length > 0 && (
                 <div className="mt-3">
                   <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-navy/40">

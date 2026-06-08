@@ -266,16 +266,14 @@ export async function buildReceipt(data: ReceiptData): Promise<jsPDF> {
   row("Years Attended", `${a.fromYear} - ${a.toYear}`);
   y += 6;
 
-  /* ── Programme ── */
-  sectionTitle("Programme & Preferences");
-  const courseNames = (a.selectedCourses ?? [])
-    .map((id) => COURSE_LABELS[id] ?? id)
-    .join(", ");
-  row("Selected Courses", courseNames || "—");
-  row("Certificate Type", cap(a.certificateType));
-  row("Schedule", cap(a.schedule));
-  row("Duration", DURATION_LABELS[a.duration] ?? cap(a.duration));
-  y += 6;
+ /* ── Programme ── */
+sectionTitle("Programme & Preferences");
+const courseName = COURSE_LABELS[a.selectedCourse] ?? a.selectedCourse ?? "—";
+row("Selected Course", courseName);
+row("Certificate Type", cap(a.certificateType));
+row("Schedule", cap(a.schedule));
+row("Duration", DURATION_LABELS[a.duration] ?? cap(a.duration));
+y += 6;
 
   /* ── Guarantor ── */
   sectionTitle("Guarantor");

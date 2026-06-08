@@ -62,7 +62,7 @@ export const SERVICES: ServiceItem[] = [
 ];
 
 export const STATS: StatItem[] = [
-  { value: "11+", label: "Career-ready courses", icon: GraduationCap },
+  { value: "4", label: "Career-ready courses", icon: GraduationCap },  // was 11+
   { value: "100%", label: "Hands-on practical training", icon: Rocket },
   { value: "3", label: "Specialised departments", icon: Award },
   { value: "All", label: "Levels welcome", icon: Users },
@@ -129,9 +129,9 @@ export const FORM_STEPS: FormStep[] = [
   {
     id: "courses",
     title: "Courses",
-    description: "Choose your programs",
+    description: "Choose your program",
     icon: BookOpen,
-    fields: ["selectedCourses"],
+    fields: ["selectedCourse"],
   },
   {
     id: "preferences",

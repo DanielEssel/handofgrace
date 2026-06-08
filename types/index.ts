@@ -4,7 +4,11 @@ import type { LucideIcon } from "lucide-react";
 /*  Domain enums / unions                                                     */
 /* -------------------------------------------------------------------------- */
 
-export type CourseCategory = "software" | "hardware" | "church-media";
+export type CourseCategory =
+  | "hardware-networking"
+  | "website-development"
+  | "church-media"
+  | "ms-office";
 
 export type Gender = "male" | "female" | "other";
 
@@ -85,7 +89,6 @@ export interface EducationBackground {
   fromYear: string;
   toYear: string;
   attendedDetails?: string;
-  
 }
 
 export interface EnrollmentPreferences {
@@ -114,7 +117,8 @@ export interface RegistrationFormValues
     EnrollmentPreferences,
     GuarantorInfo,
     Declaration {
-  selectedCourses: string[];
+  /** Single course selection — applicant picks exactly one. */
+  selectedCourse: string;
 }
 
 export interface FormStep {
@@ -202,7 +206,8 @@ export interface ApplicationRecord {
   lastName: string;
   email: string;
   mobile: string;
-  selectedCourses: string[];
+  /** Single course the applicant enrolled in. */
+  selectedCourse: string;
   certificateType: string;
   schedule: string;
   duration: string;
