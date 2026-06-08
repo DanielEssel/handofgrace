@@ -44,8 +44,8 @@ export const educationSchema = z
 
 export const coursesSchema = z.object({
   selectedCourse: z
-    .array(z.string())
-    .min(1, "Select at least one course to enroll in"),
+    .string()
+    .min(1, "Select a course to enroll in"),
 });
 
 export const preferencesSchema = z.object({
