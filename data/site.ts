@@ -44,7 +44,7 @@ export const SITE = {
   ],
 } as const;
 
-export const APPLICATION_FEE = 100; // GH₵
+export const APPLICATION_FEE = 1; // GH₵
 
 export const NAV_LINKS: NavLink[] = [
   {
